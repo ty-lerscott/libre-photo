@@ -83,7 +83,7 @@ export default function PhotoshopClone() {
       {/* Top Menu Bar */}
       <div className="flex items-center justify-between px-4 py-1 bg-[#2a2a2a] border-b border-[#3a3a3a]">
         <div className="flex items-center gap-4">
-          <div className="text-blue-400 font-bold">Lp</div>
+          <div className="text-purple-400 font-bold">Lp</div>
           <div className="flex gap-4">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>

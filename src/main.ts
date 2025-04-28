@@ -1,5 +1,5 @@
 import { app, BrowserWindow } from 'electron';
-import * as path from 'path';
+import path from 'path';
 
 function createWindow() {
   const mainWindow = new BrowserWindow({
@@ -14,18 +14,6 @@ function createWindow() {
   mainWindow.loadFile(path.join(__dirname, '../src/index.html'));
 }
 
-app.whenReady().then(() => {
-  createWindow();
+app.whenReady().then(createWindow);
 
-  app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) {
-      createWindow();
-    }
-  });
-});
-
-app.on('window-all-closed', (args: Event) => {
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
-}); 
+app.on('window-all-closed', app.quit); 

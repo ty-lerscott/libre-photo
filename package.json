@@ -1,13 +1,12 @@
 {
   "name": "libre-photo",
   "version": "1.0.0",
-  "description": "An Electron app built with TypeScript",
+  "description": "An Open Source Photo Management Application",
   "main": "dist/main.js",
   "scripts": {
     "start": "electron .",
     "build": "tsc",
-    "watch": "tsc -w",
-    "dev": "npm run build && electron ."
+    "watch": "tsc -w"
   },
   "author": "",
   "license": "MIT",

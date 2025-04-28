@@ -9,49 +9,30 @@ import {
   ChevronDown,
   Circle,
   Copy,
-  CropIcon,
   EyeIcon,
-  FileText,
   Folder,
-  Hand,
   ImageIcon,
   Italic,
   Layers,
   Maximize2,
   Minus,
   MoreHorizontal,
-  Move,
-  Paintbrush,
   PanelLeft,
   PanelRight,
-  PenTool,
   Plus,
   Redo,
-  Save,
-  Settings,
-  Share2,
-  Square,
   Text,
-  Type,
   Underline,
-  Undo,
-  WandIcon,
-  ZoomIn,
+  Undo
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Slider } from "@/components/ui/slider"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { Separator } from "@/components/ui/separator"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+import MenuBar from "@/components/menu-bar"
+import ToolBar from "@/components/tool-bar"
 
 export default function PhotoshopClone() {
   const [activeTool, setActiveTool] = useState("move")
@@ -59,18 +40,7 @@ export default function PhotoshopClone() {
   const [zoom, setZoom] = useState(100)
   const [selectedLayer, setSelectedLayer] = useState("Layer 1")
 
-  const tools = [
-    { id: "move", icon: Move, tooltip: "Move Tool (V)" },
-    { id: "select", icon: Square, tooltip: "Rectangular Marquee Tool (M)" },
-    { id: "lasso", icon: PenTool, tooltip: "Lasso Tool (L)" },
-    { id: "magic-wand", icon: WandIcon, tooltip: "Magic Wand Tool (W)" },
-    { id: "crop", icon: CropIcon, tooltip: "Crop Tool (C)" },
-    { id: "eyedropper", icon: EyeIcon, tooltip: "Eyedropper Tool (I)" },
-    { id: "brush", icon: Paintbrush, tooltip: "Brush Tool (B)" },
-    { id: "text", icon: Type, tooltip: "Type Tool (T)" },
-    { id: "hand", icon: Hand, tooltip: "Hand Tool (H)" },
-    { id: "zoom", icon: ZoomIn, tooltip: "Zoom Tool (Z)" },
-  ]
+  
 
   const layers = [
     { id: "Layer 1", name: "Background", visible: true, locked: false, type: "image" },
@@ -81,92 +51,12 @@ export default function PhotoshopClone() {
   return (
     <div className="flex flex-col h-screen bg-[#1e1e1e] text-gray-200 overflow-hidden">
       {/* Top Menu Bar */}
-      <div className="flex items-center justify-between px-4 py-1 bg-[#2a2a2a] border-b border-[#3a3a3a]">
-        <div className="flex items-center gap-4">
-          <div className="text-purple-400 font-bold">Lp</div>
-          <div className="flex gap-4">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="h-7">
-                  File
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-[#2a2a2a] border-[#3a3a3a]">
-                <DropdownMenuItem>
-                  <FileText className="mr-2 h-4 w-4" />
-                  <span>New</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Folder className="mr-2 h-4 w-4" />
-                  <span>Open</span>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                  <Save className="mr-2 h-4 w-4" />
-                  <span>Save</span>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-            <Button variant="ghost" size="sm" className="h-7">
-              Edit
-            </Button>
-            <Button variant="ghost" size="sm" className="h-7">
-              Image
-            </Button>
-            <Button variant="ghost" size="sm" className="h-7">
-              Layer
-            </Button>
-            <Button variant="ghost" size="sm" className="h-7">
-              Select
-            </Button>
-            <Button variant="ghost" size="sm" className="h-7">
-              Filter
-            </Button>
-            <Button variant="ghost" size="sm" className="h-7">
-              View
-            </Button>
-            <Button variant="ghost" size="sm" className="h-7">
-              Window
-            </Button>
-            <Button variant="ghost" size="sm" className="h-7">
-              Help
-            </Button>
-          </div>
-        </div>
-        <div className="flex items-center gap-2">
-          <Button variant="ghost" size="icon" className="h-7 w-7">
-            <Settings className="h-4 w-4" />
-          </Button>
-          <Button variant="ghost" size="icon" className="h-7 w-7">
-            <Share2 className="h-4 w-4" />
-          </Button>
-        </div>
-      </div>
+      <MenuBar />
 
       {/* Toolbar */}
       <div className="flex flex-1 overflow-hidden">
         {/* Left Toolbar */}
-        <div className="w-12 bg-[#2a2a2a] border-r border-[#3a3a3a] flex flex-col items-center py-2 gap-1">
-          <TooltipProvider>
-            {tools.map((tool) => (
-              <Tooltip key={tool.id}>
-                <TooltipTrigger asChild>
-                  <Button
-                    variant={activeTool === tool.id ? "secondary" : "ghost"}
-                    size="icon"
-                    className="h-8 w-8"
-                    onClick={() => setActiveTool(tool.id)}
-                  >
-                    <tool.icon className="h-4 w-4" />
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent side="right">
-                  <p>{tool.tooltip}</p>
-                </TooltipContent>
-              </Tooltip>
-            ))}
-          </TooltipProvider>
-        </div>
+        <ToolBar activeTool={activeTool} setActiveTool={setActiveTool} />
 
         {/* Main Content Area */}
         <div className="flex-1 flex flex-col">

@@ -24,7 +24,7 @@ app.whenReady().then(() => {
   });
 });
 
-app.on('window-all-closed', () => {
+app.on('window-all-closed', (args: Event) => {
   if (process.platform !== 'darwin') {
     app.quit();
   }
